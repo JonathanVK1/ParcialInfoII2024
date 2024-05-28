@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "show.h"
+#include "Reg.h"
 
 
 
@@ -10,7 +11,7 @@ int main(){
     uint64_t header;
     uint16_t Id;
     uint16_t Low;
-    uint64_t Upper;
+    uint16_t Upper;
     int n=0,i=0,j=0;
 
     if(f==NULL){
@@ -34,5 +35,9 @@ int main(){
     }
     printf("cant %d\n",j);
     rewind(f);
+    while(!feof(f)){
+        fread(&header,sizeof(uint64_t),1,f);
+        getRegister(header);
+    }
 
 }
