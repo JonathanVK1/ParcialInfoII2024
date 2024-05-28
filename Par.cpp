@@ -8,6 +8,7 @@
 int main(){
 
     FILE *f=fopen("network_structure.dat","rb");
+    int Lower;
     uint64_t header;
     uint16_t Id;
     uint16_t Low;
@@ -25,19 +26,18 @@ int main(){
     while(!feof(f)){
         fread(&header,sizeof(uint64_t),1,f);
         j=countDevices(j);
-        //printf("header : %u\n",header);
         showIDs(header);
-        //Low=(header<<16)>>48;
-
-        //printf("Low : %u\n",Low);
-        //Upper=(header<<48)>>48;
-        //printf("Upper : %u\n",Upper);
     }
-    printf("cant %d\n",j);
+    printf("cant Ids %d\n",j);
     rewind(f);
     while(!feof(f)){
         fread(&header,sizeof(uint64_t),1,f);
         getRegister(header);
     }
+    rewind(f);
+    while(!feof(f)){
+        fread(&Lower,sizeof(int),1,f);
+        printf("Id anterior %u\n",Lower);
 
+    }
 }
